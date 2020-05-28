@@ -206,6 +206,15 @@ void eliminare_productii_inutile(int& n, char st[], const char& start, set<strin
                     terminal[i] = true; /// daca starea i are o productie care merge in terminal, o marcam cu true
                     break;
                 }
+                else
+                    if((*it).size() > 1)
+                    {
+                        for(j = 0; j < (*it).size(); j++)
+                            if(!('a' <= (*it)[j] && (*it)[j] <= 'z'))
+                                break;
+                        if(j >= (*it).size())
+                            terminal[i] = true;
+                    }
         }
     for(i = 0; i < n; i++)
         if(!el[i] && !terminal[i])    /// daca starea i nu are productii care merg in terminale, verificam daca neterminalele
@@ -393,11 +402,13 @@ int main()
     set<string> prod[260];    /// prod[i] = productiile starii care se gaseste pe pozitia i in codul ASCII
 
     citire(f, nr_stari, stare, start, prod, elim);
+
     eliminare_lambda_productii(nr_stari, stare, start, prod, elim);
     eliminare_redenumiri(nr_stari, stare, start, prod, elim);
     eliminare_productii_inutile(nr_stari, stare, start, prod, elim);
     adaugare_neterminale_noi(nr_stari, stare, start, prod);
     adaugare_neterminale_noi_2(nr_stari, stare, start, prod);
+
     afisare(g, nr_stari, stare, start, prod);
 
     f.close();
