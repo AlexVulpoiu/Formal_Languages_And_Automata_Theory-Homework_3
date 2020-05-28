@@ -3,6 +3,7 @@
 #include <queue>
 #include <set>
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -187,7 +188,7 @@ void eliminare_productii_inutile(int& n, char st[], const char& start, set<strin
             for(i = 0; i < (*it).size(); i++)
             {
                 for(s = 0; s < n; s++)
-                    if(st[s] == (*it)[0])
+                    if(st[s] == (*it)[i])
                         break;
                 if(!viz[s])
                     q.push(s);
